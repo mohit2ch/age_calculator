@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  <title>Frontend Mentor | Age calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <form action="" id="dateform">
+      <div class="formgroup">
+        <label for="day">D A Y</label>
+        <input id="day" type="number" onchange="dayChangeHandler()">
+        <span id="day_error">Must be a valid day</span>
+        <span id="date_error">Must be a valid date</span>
+      </div>
+      <div class="formgroup">
+        <label for="month">M O N T H</label>
+        <input id="month" type="number" onchange="monthChangeHandler()">
+        <span id="month_error">Must be a valid month</span>
+      </div>
+      <div class="formgroup">
+        <label for="year">Y E A R</label>
+        <input id="year" type="number" onchange="yearChangeHandler()">
+        <span id="year_error">Must be in the past</span>
+      </div>
+      
+    </form>
+    <div id="buttondiv">
+    <button onclick="clickHandler()"><img src="./assets/images/icon-arrow.svg" alt=""></button></div>
+    <div class="output">
+      <div class="outputgroup"><span id="year_out" >--</span> years</div>
+      <div class="outputgroup"><span id="month_out">--</span> months</div>
+      <div class="outputgroup"><span id="day_out">--</span> days</div>
+    </div>
+  </main>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+    Coded by <a href="#">Your Name Here</a>.
+  </div>
+</body>
+<script>
+  
+  function dayChangeHandler(){
+    let day = (document.getElementById('day').value);
+    if(day>31 || day<1){
+      document.getElementById('day_error').style.display = 'block';
+      document.querySelector('button').disabled = true;
+    } else{
+      document.getElementById('day_error').style.display = 'none';
+      document.querySelector('button').disabled = false;
+    }
+  }
+  function monthChangeHandler(){
+    let month = document.getElementById('month').value;
+    if(month>12 || month<1){
+      document.getElementById('month_error').style.display = 'block';
+      document.querySelector('button').disabled = true;
+    } else {
+      document.getElementById('month_error').style.display = 'none';
+      document.querySelector('button').disabled = false
+    }
+  }
+  function yearChangeHandler(){
+    let year = document.getElementById('year').value;
+    let date = new Date();
+    if(year > date.getFullYear()){
+      document.getElementById('year_error').style.display = 'block';
+      document.querySelector('button').disabled = true;
+    } else {
+      document.getElementById('year_error').style.display = 'none';
+      document.querySelector('button').disabled = false
+    }
+  }
+  function isDateValid(day, month, year){
+    let flag = !isNaN(new Date(`${month}/${day}/${year}`));
+    months = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+    flag = flag && months[month-1]>=day;
+    return flag;
+  }
+  function dateDiffInDays(d, m, y) {
+    let date = new Date();
+    let year = -y + date.getFullYear();
+    let month = -m + date.getMonth() + 1;
+    
+    let day = date.getDate() - d;
+    console.log(day, date.getMonth(), year);
+    if(day < 0){
+      day = 30 + day;
+      month -=1;
+    }
+    if(month < 0){
+      month = 12 + month;
+      year -= 1;
+    }
+    return {
+      'd':day,
+      'm':month,
+      'y':year
+    };
+  }
+  function errorDate(){
+    document.getElementById('date_error').style.display = 'block';
+      document.getElementById('day_out').innerText = "--";
+      document.getElementById('month_out').innerText = "--";
+      document.getElementById('year_out').innerText = "--";
+  }
+  function clickHandler(){
+    let day = document.getElementById('day').value;
+    let month = document.getElementById('month').value;
+    let year = document.getElementById('year').value;
+    // console.log(isDateValid(`${month}/${day}/${year}`));
+    if(isDateValid(day, month, year)){
+      document.getElementById('date_error').style.display = 'none';
+      a = new Date();
+      b = new Date(`${year}-${month}-${day}`);
+      console.log(a);
+      const {d, m, y} = dateDiffInDays(day, month, year);
+      if(y < 0){
+        errorDate();
+      }
+      else{
+        document.getElementById('day_out').innerText = d;
+      document.getElementById('month_out').innerText = m;
+      document.getElementById('year_out').innerText = y;
+      }
+      
+      
+    }
+    else{
+      errorDate();
+    }
+  }
+</script>
+</html>

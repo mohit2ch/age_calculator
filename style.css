@@ -1,0 +1,134 @@
+@font-face {
+    font-family: 'poppins-bold';
+    src: url('./assets/fonts/Poppins-Bold.ttf');
+}
+@font-face {
+    font-family: 'poppins-bold-italic';
+    src: url('./assets/fonts/Poppins-BoldItalic.ttf');
+}
+@font-face {
+    font-family: 'poppins-extrabold';
+    src: url('./assets/fonts/Poppins-ExtraBold.ttf');
+}
+@font-face {
+    font-family: 'poppins-extrabold-italic';
+    src: url('./assets/fonts/Poppins-ExtraBoldItalic.ttf');
+}
+@font-face {
+    font-family: 'poppins-italic';
+    src: url('./assets/fonts/Poppins-Italic.ttf');
+}
+*{
+    margin: 0;
+    border: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: blueviolet;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+main{
+    min-height: 600px;
+    /* width: 60%; */
+    /* min-width: 500px; */
+    background-color: white;
+    border-radius: 20px 20px 120px 20px;
+    overflow: hidden;
+    padding: 50px;
+}
+#dateform{
+    display: flex;
+    width: 100%;
+    /* justify-content: space-between; */
+    padding-bottom: 30px;
+    border-bottom: solid 1px;
+}
+.formgroup{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+.formgroup>label{
+    font-family: 'poppins-bold';
+    color: hsl(0, 1%, 44%);
+}
+.formgroup>input{
+    font-family: 'poppins-bold';
+    border: solid 1px;
+    height: 70px;
+    border-radius: 10px;
+    margin: 10px 0;
+    padding: 10px 20px;
+    padding-right: 10px;
+    max-width: 150px;
+    width: 100%;
+    font-size: 2rem;
+}
+.formgroup>span{
+    color: hsl(0, 100%, 67%);
+    font-family: 'poppins-italic';
+    display: none;
+}
+#buttondiv{
+    display: flex;
+    justify-content: end;
+    height: 0;
+}
+button{
+    background-color: hsl(259, 100%, 65%);
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    position: relative;
+    bottom: 50px;
+    cursor: pointer;
+}
+button:hover{
+    background-color: black;
+}
+.outputgroup{
+    font-family: 'poppins-extrabold-italic';
+    font-size: 5rem;
+}
+.outputgroup>span{
+    color: hsl(259, 100%, 65%);
+}
+@media screen and (max-width: 600px) {
+    body{
+        /* background-color: aliceblue; */
+        width: auto;
+    }
+    main{
+        padding: 20px;
+        width: auto;
+    }
+    #buttondiv{
+        justify-content: center;
+        margin-bottom: 30px;
+    }
+    #dateform{
+        flex-direction: column;
+    }
+    .formgroup>label{
+        font-size: 0.9rem;
+    }
+    .formgroup>input{
+        height: 50px;
+        margin: 0;
+    }
+    .outputgroup{
+        font-size: 3rem;
+    }
+    button{
+        height: 70px;
+        width: 70px;
+        bottom: 35px;
+    }
+}
